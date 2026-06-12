@@ -54,7 +54,7 @@ function buildContext(matches: VectorizeMatches): string {
     .map((m, i) => {
       const meta = m.metadata || {};
       const name = meta.name || meta.crate_name || `crate-${m.id}`;
-      const description = meta.description || meta.doc || "No description available";
+      const description = meta.description || meta.desc || meta.doc || "No description available";
       const score = m.score?.toFixed(4);
       return `[${i + 1}] ${name} (score: ${score})\n    ${description}`;
     })
@@ -138,7 +138,7 @@ export default {
           id: m.id,
           name: m.metadata?.name || m.metadata?.crate_name || m.id,
           score: m.score,
-          description: m.metadata?.description || m.metadata?.doc || "",
+          description: m.metadata?.description || m.metadata?.desc || m.metadata?.doc || "",
         }));
 
         return Response.json(
@@ -176,7 +176,7 @@ export default {
           id: m.id,
           name: m.metadata?.name || m.metadata?.crate_name || m.id,
           score: m.score,
-          description: m.metadata?.description || m.metadata?.doc || "",
+          description: m.metadata?.description || m.metadata?.desc || m.metadata?.doc || "",
         }));
 
         return Response.json(
