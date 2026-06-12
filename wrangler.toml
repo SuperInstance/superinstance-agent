@@ -1,0 +1,14 @@
+name = "superinstance-agent"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+account_id = "049ff5e84ecf636b53b162cbb580aae6"
+
+[ai]
+binding = "AI"
+
+[[vectorize]]
+binding = "CRATE_INDEX"
+index_name = "fleet-crates"
+
+[triggers]
+crons = []
