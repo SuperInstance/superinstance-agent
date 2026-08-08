@@ -134,6 +134,35 @@ curl https://superinstance-agent.<account>.workers.dev/health
 
 Returns service status and binding health.
 
+## Testing
+
+The agent includes a comprehensive test suite covering routing, CORS, error handling, metadata field resolution, and edge cases.
+
+```bash
+# Run all tests
+npm test
+
+# Watch mode for development
+npm run test:watch
+
+# With coverage report
+npm run test:coverage
+```
+
+Tests cover:
+- `/health` endpoint and binding status detection
+- `/ask` and `/recommend` input validation
+- Metadata field resolution (`description` → `desc` → `doc` fallback chain)
+- topK parameter sanitization and capping
+- CORS preflight handling
+- 404 routing for unknown paths
+- 500 error handling when AI/Vectorize bindings fail
+- Edge cases: empty results, missing metadata, null fields
+
+### Known Issues
+
+See `DEBUG-REPORT.md` for the metadata field mismatch documentation (`desc` vs `description`). The fix is in place and tested.
+
 ## Architecture Notes
 
 This crate is part of the **SuperInstance ecosystem** and implements the **γ + η = C conservation law** at the agent interface. The user's question carries an implicit information content $\gamma$ (the semantic intent). The agent's answer carries $\eta$ (the retrieved + generated response). The conservation constraint $C$ requires that the answer fully addresses the question — no information is lost between intent and response.
